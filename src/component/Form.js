@@ -17,14 +17,14 @@ function Formbasic() {
             <div  className="input-group-prepend">
               <span  className="input-group-text p-3 bg-dark text-white" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
             </div>
-            <input type="text" className="form-control bg-dark " placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+            <input type="text" className="form-control bg-dark text-white" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
           </div>
 
           <div  className="input-group mb-3">
             <div  className="input-group-prepend">
               <span  className="input-group-text p-3 bg-dark text-white" id="basic-addon1"><i class="fa-sharp fa-solid fa-lock"></i></span>
             </div>
-            <input type="text"  className="form-control bg-dark " placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"/>
+            <input type="text"  className="form-control bg-dark text-white " placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"/>
           </div>
           <div className="checked">
                 <div className="form-check">
