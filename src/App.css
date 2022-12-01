@@ -1,0 +1,97 @@
+body{
+  /* background: linear-gradient(-0.4deg, #f8acff 0%, #696eff 70% ); */
+  
+    background: linear-gradient(#BE7873, #845E7F,#394881);
+   
+    
+}
+.box1{
+  width: 40%;
+  height:350px;
+  background-color: #BBACBF;
+  margin: auto;
+  border-radius: 20px;
+  
+}
+
+.Section{
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+.icon-user{
+  background-color:rgb(18, 33, 62,1);
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  align-items: center;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  left: 200px;
+}
+.icon-user i{ 
+  color: aliceblue;
+  font-size: 4rem;
+  padding: 5px;
+}
+.icon-login{
+left: 80;
+display: flex;
+justify-content: center;
+position: relative;
+width: 25%;
+}
+
+
+
+.form1{
+  position: relative;
+  
+}
+.inputs{
+  z-index: 200;
+  
+}
+.div-submit{
+  position: absolute;
+  left: 50px;
+  top: 320px;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 10%, #a699aa 60%);
+  border-radius: 0px 0px 40px 40px ;
+  width: 80%;
+}
+
+.submit-btn{
+  background-color: hsla(0, 0%, 0%, 0) ;
+  height: 70px;
+  border: 1px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.submit-btn:hover, .submit-btn:active, .submit-btn:focus {
+  color: #585858 !important;
+  font-weight: 1000;
+  background-color: hsla(0, 0%, 0%, 0) !important;
+}
+.input-group-text {
+border: none ;
+border-radius: 5px 0px 0px 5px ;
+}
+.checked{
+  display: flex;
+  justify-content: space-between;
+}
+.form-control{
+  border: none ;
+}
