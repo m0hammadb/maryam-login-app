@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useState , useRef} from "react";
 import { NavLink } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-var errors_array = [];
 
 function Formbasic() {
-  const [Errors, setErrors] = useState();
   const [IsValidEmail, setIsValidEmail] = useState(false);
   const [IsValidPass, setIsValidPass] = useState(false);
-  var errors_obj = document.getElementById("errors");
+
+
+  const emailElementRef = useRef(null);
+  const passwordElementRef = useRef(null);
+
   
-  function isValidEmail(email) {
+  function validateEmail(email) { // esmesh ba oon useState yeki bood avaz kardam ke gij konande nabashe
     return /\S+@\S+\.\S+/.test(email);
   }
   
+  function validatePassword(password){
+    if(password.length >= 8){
+      return true;
+    }else{
+      return false;
+    }
+  }
   function validateForm(e) {
     e.preventDefault();
     if (IsValidEmail  !== true || IsValidPass !== true) {
@@ -24,40 +33,20 @@ function Formbasic() {
   }
   function handleEmailChange(e) {
     // console.log(e)
-    let email_obj = document.getElementById("floatingInput");
-    e.preventDefault();
-    if (!isValidEmail(e.target.value)) {
-      setErrors("Email is invalid");
-      setIsValidEmail(false);
-      email_obj.classList.add("invalid");
-      if (!isValidEmail.includes("email problem")) {
-        isValidEmail.push("email problem");
-       
-      }
-    } else {
-      email_obj.classList.add("valid");
-      setErrors(null);
-      errors_array.splice(errors_array.indexOf("email problem"), 1);
+    const email = emailElementRef.current.value;
+    if(validateEmail(email)){
       setIsValidEmail(true);
-      
+    }else{
+      setIsValidEmail(false);
     }
   }
-  function handlePass(e) {
-    let pass_obj = document.getElementById("floatingPassword");
-    e.preventDefault();
-    if(e.target.value.length>=8){
-      setErrors(null);
+  function handlePassChange(e) { //say kon codet az ye olgoo peyravi kone masalan age esme tabe bala ro gozashti handlEmailChange 
+                                // ino bezar handlePassChange be jaye hanldePass ke badan gij nashi
+    const password = passwordElementRef.current.value;
+    if(validatePassword(password)){
       setIsValidPass(true);
-      errors_array.splice(errors_array.indexOf("pass problem"), 1);
-      
-      pass_obj.classList.add("valid");
     }else{
-      if (!errors_array.includes("pass problem")) {
-        errors_array.push("pass problem");
-      }
       setIsValidPass(false);
-      setErrors("Password is invalid");
-      pass_obj.classList.add("invalid");
     }
   }
 
@@ -92,11 +81,12 @@ function Formbasic() {
                 id="floatingInput"
                 name="email"
                 required
-                className="form-control bg-dark text-white"
+                className={`form-control bg-dark text-white ${IsValidEmail ? "valid":"invalid"}`}
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 onChange={handleEmailChange}
+                ref={emailElementRef}
               />
             </div>
 
@@ -110,13 +100,14 @@ function Formbasic() {
                 </span>
               </div>
               <input
-                type="text"
-                className="form-control bg-dark text-white "
+                type="password" //type in ham password bashe behtare ke text ro neshoon nade (midoonam midoonesi havaset naboode :D)
+                className={`form-control bg-dark text-white ${IsValidPass ? "valid":"invalid"}`}
                 placeholder="Password"
                 aria-label="Password"
                 aria-describedby="basic-addon1"
                 id="floatingPassword"
-                onChange={handlePass}
+                onChange={handlePassChange}
+                ref={passwordElementRef}
               />
             </div>
             <div className="checked">
@@ -131,7 +122,7 @@ function Formbasic() {
               <NavLink rel="stylesheet">Forgot Password?</NavLink>
             </div>
 
-            <div id="errors">{Errors}</div>
+
           </div>
           <div className="div-submit">
             <Button className="submit-btn" type="submit">
