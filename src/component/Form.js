@@ -3,42 +3,61 @@ import { NavLink } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function isValidEmail(email) {
-  return /\S+@\S+\.\S+/.test(email);
-}
+var errors_array = [];
 
 function Formbasic() {
   const [Errors, setErrors] = useState();
   const [IsValidEmail, setIsValidEmail] = useState(false);
   const [IsValidPass, setIsValidPass] = useState(false);
-
-
+  var errors_obj = document.getElementById("errors");
+  
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
   
   function validateForm(e) {
     e.preventDefault();
     if (IsValidEmail  !== true || IsValidPass !== true) {
-      document.getElementById("error-email").innerHTML="Please fill in the blank fields "
+      document.getElementById("errors").innerHTML="Please fill in the blank fields "
     }
     
   }
   function handleEmailChange(e) {
     // console.log(e)
+    let email_obj = document.getElementById("floatingInput");
     e.preventDefault();
     if (!isValidEmail(e.target.value)) {
       setErrors("Email is invalid");
       setIsValidEmail(false);
+      email_obj.classList.add("invalid");
+      if (!isValidEmail.includes("email problem")) {
+        isValidEmail.push("email problem");
+       
+      }
     } else {
+      email_obj.classList.add("valid");
       setErrors(null);
+      errors_array.splice(errors_array.indexOf("email problem"), 1);
       setIsValidEmail(true);
+      
     }
   }
   function handlePass(e) {
+    let pass_obj = document.getElementById("floatingPassword");
+    e.preventDefault();
     if(e.target.value.length>=8){
       setErrors(null);
       setIsValidPass(true);
+      errors_array.splice(errors_array.indexOf("pass problem"), 1);
+      
+      pass_obj.classList.add("valid");
     }else{
+      if (!errors_array.includes("pass problem")) {
+        errors_array.push("pass problem");
+      }
       setIsValidPass(false);
       setErrors("Password is invalid");
+      pass_obj.classList.add("invalid");
     }
   }
 
@@ -70,6 +89,7 @@ function Formbasic() {
               </div>
               <input
                 type="text"
+                id="floatingInput"
                 name="email"
                 required
                 className="form-control bg-dark text-white"
@@ -95,6 +115,7 @@ function Formbasic() {
                 placeholder="Password"
                 aria-label="Password"
                 aria-describedby="basic-addon1"
+                id="floatingPassword"
                 onChange={handlePass}
               />
             </div>
@@ -110,7 +131,7 @@ function Formbasic() {
               <NavLink rel="stylesheet">Forgot Password?</NavLink>
             </div>
 
-            <div id="error-email">{Errors}</div>
+            <div id="errors">{Errors}</div>
           </div>
           <div className="div-submit">
             <Button className="submit-btn" type="submit">
